@@ -1,22 +1,28 @@
-#[cfg(all(target_os = "macos", feature = "macos-native"))]
-mod ui;
-#[cfg(all(target_os = "macos", feature = "macos-native"))]
+#[cfg(feature = "macos-native")]
+mod app;
+#[cfg(feature = "macos-native")]
+mod core;
+#[cfg(feature = "macos-native")]
+mod data;
+#[cfg(feature = "macos-native")]
+mod elements;
+#[cfg(feature = "macos-native")]
+mod game;
+#[cfg(feature = "macos-native")]
 mod platform;
-#[cfg(all(target_os = "macos", feature = "macos-native"))]
+#[cfg(feature = "macos-native")]
 mod runtime;
+#[cfg(feature = "macos-native")]
+mod screens;
 
-#[cfg(all(target_os = "macos", feature = "macos-native"))]
+#[cfg(feature = "macos-native")]
 fn main() {
-    incredible_window_macos::set_window_title(
-        option_env!("APP_NAME").unwrap_or("Incredible Template"),
-    );
+    incredible_window_macos::set_window_title(option_env!("APP_NAME").unwrap_or("Shape Sorting"));
     platform::init();
     incredible_window_macos::run_app(runtime::run);
 }
 
-#[cfg(any(not(target_os = "macos"), not(feature = "macos-native")))]
+#[cfg(not(feature = "macos-native"))]
 fn main() {
-    eprintln!(
-        "This binary is only available for macOS targets with the 'macos-native' feature enabled."
-    );
+    eprintln!("This binary is only available for macOS targets.");
 }

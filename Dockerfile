@@ -8,10 +8,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fL \
-    https://github.com/ronilan/incredible_app_template1/releases/latest/download/incredible_app_template1-terminal-linux.zip \
-    -o /tmp/incredible_app_template1.zip \
-    && unzip -o /tmp/incredible_app_template1.zip -d /usr/local/bin \
-    && rm /tmp/incredible_app_template1.zip \
-    && chmod +x /usr/local/bin/incredible_app_template1
+    https://github.com/ronilan/shape_sorting/releases/latest/download/shape_sorting-terminal-linux.zip
+    -o /tmp/shape_sorting.zip
+    && unzip -o /tmp/shape_sorting.zip -d /usr/local/bin
+    && rm /tmp/shape_sorting.zip
+    && chmod +x /usr/local/bin/shape_sorting
 
 CMD ["/bin/bash", "-i"]

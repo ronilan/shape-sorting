@@ -1,7 +1,16 @@
-use crate::{platform, ui::app};
+use crate::{app, core::State, platform};
 
-pub fn run() -> incredible::tui::DeferredValue<app::State> {
+pub(crate) fn run() -> incredible::tui::DeferredValue<State> {
     platform::init();
 
-    app::build().run(app::State::default())
+    let state = platform::load_state();
+    let app = app::build();
+
+    let deferred = app.run(state);
+
+    deferred.on_set(|final_state| {
+        platform::save_state(&final_state);
+    });
+
+    deferred
 }

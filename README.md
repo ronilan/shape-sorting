@@ -1,151 +1,100 @@
-# Incredible Template
+# Shape Sorting
 
-A multi-platform template for building TUI applications using the [Incredible](https://www.incredible.rs) framework.
+A shape sorting game built on the [Incredible](https://www.incredible.rs) framework.
 
-This template is configured to build and package your application for four distinct platforms from a single codebase:
+Move shapes from the shape box into the drop boxes and sort them by **shape** or **color**. Play with the keyboard (🔑), the mouse (🐭), or both (🔑 & 🐭) — and find out which is faster!
 
-*   **Terminal**: A native binary that runs directly in your terminal. The version built depends on the platform on which you are running.
-*   **Web**: Compiled to WASM and hosted as a static site with setup ready for GitHub Pages.
-*   **macOS**: A double-clickable native GUI application.
-*   **Windows**: A double-clickable native GUI application.
+## Overview
 
-## Getting Started
-> Make sure you meet [development environment prerequisites](markdowns/DEVELOPMENT_PREREQUISITES.md).
-0) Make sure git can authenticate with the private [incredible-alpha](markdowns/DEVELOPMENT_PREREQUISITES.md#github-authentication) repository (`gh auth login`).
-1) Build the tools.
-2) Run config.
-3) Develop the app.
-4) Package & Publish from development environment.
-5) Publish with GitHub Actions.
+The game opens on a splash screen where you pick an input mode, runs on the board while you sort, and shows your time when the shape box is emptied. Your fastest game and total time wasted are saved between runs.
 
-## Build Tools
+## Features
 
-From the root of the repo, build all three tools (config, package, run):
+- **Keyboard, Mouse, or Both** — pick your input mode on the splash screen
+- **Sort by shape or by color** — two ways to empty the box
+- **Stats between runs** — fastest game and total time wasted are persisted
+- **Cross-platform** — a terminal app, a native GUI app on macOS and Windows, and a browser version (WASM)
+
+## Installation
+
+Pre-built binaries are provided for each [release](https://github.com/ronilan/shape_sorting/releases).
+
+### Quick install (script)
+
+One-liners, in the style of rustup's installer. The scripts fetch the right binary for your platform from the latest release and place it on the PATH automatically. No clone or build required.
+
+**macOS / Linux** — installs into `/usr/local/bin` (asks for your password for `sudo`):
+
 ```bash
-cargo build-tools
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ronilan/shape_sorting/main/install.sh | bash
 ```
 
-Then copy the freshly built binaries to the project root:
+**Windows** — installs into `C:\Program Files\shape_sorting` and adds that folder to the system PATH (the script self-elevates with a UAC prompt):
 
-**macOS:**
-```bash
-cp target/release/config target/release/package target/release/run .
-chmod +x config package run
-```
-
-**Windows (PowerShell):**
 ```powershell
-copy target\release\config.exe .
-copy target\release\package.exe .
-copy target\release\run.exe .
+irm https://raw.githubusercontent.com/ronilan/shape_sorting/main/install.ps1 | iex
 ```
 
-The tools are then executed from the project root (`./config`, `./package`, `./run` on macOS; `config.exe`, `package.exe`, `run.exe` on Windows).
+If you prefer to look before you run, download first, inspect, then execute:
 
-## Config App
-
-From the root of the repo:
-```bash
-./config
-```
-
-Update fields as needed for the app being developed. Note: config can be run at any time to change values.
-
-For full documentation of all CLI flags, validation rules, and the list of files the config tool updates, see [`tools/config/README.md`](tools/config/README.md).
-
-Note: to change **Icon**: Replace `web/favicon.svg` with your own SVG logo. The macOS and Windows bundle scripts will automatically regenerate the application icon during the next build.
-
-## Develop App
-
-Code for the app is at `src/`.
-
-It contains files designated for application development: `app.rs` and `platform.rs` and a set of preconfigured gated entry points that are conditionally compiled based on the target platform. Only one is used per build. Generally there is no need to modify these.
-
-App Code:
-```
-src/
-├── ui/
-│   └── app.rs    # Cross-platform application code.
-└── platform.rs   # Platform specific code required by app.
-```
-
-```
-src/
-├── main.rs      # Terminal entry point - runs as a native TUI binary
-├── lib.rs       # WASM entry point - exports `main()` for web builds
-├── macos.rs     # macOS native entry point - runs the app as a native GUI
-├── windows.rs   # Windows native entry point - runs the app as a native GUI
-├── runtime.rs   # Shared runtime - initializes platform and runs the app
-```
-
-From the root of the repo use: `./run` (or `./run.exe` on Windows) to launch an interactive selection menu or pass platform flags:
+**macOS / Linux:**
 
 ```bash
-./run                   # Opens interactive selection UI
-./run terminal          # Build/run for terminal target
-./run wasm              # Build/run for web target (build + static serve)
-./run macos             # Build/run for macOS native target
-./run windows           # Build/run for Windows native target
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ronilan/shape_sorting/main/install.sh -o install.sh
+bash install.sh
 ```
 
-For full documentation of the run tool, see [`tools/run/README.md`](tools/run/README.md).
+**Windows:**
 
-## Package & Publish
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ronilan/shape_sorting/main/install.ps1" -OutFile install.ps1
+powershell -ExecutionPolicy Bypass -File install.ps1
+```
 
-From the root of the repo:
+### Manual install
+
+**macOS / Linux** — download the binary for your platform from the [latest release](https://github.com/ronilan/shape_sorting/releases), then move it to `/usr/local/bin` (a centralized folder on the default PATH) and give it execution permissions:
 
 ```bash
-./package
+sudo mv shape_sorting /usr/local/bin/
+sudo chmod +x /usr/local/bin/shape_sorting
 ```
 
-Opens the interactive package tool UI. Select your target (All, Terminal, Web, macOS Native) and options (Clean, Bundle, Publish, Preview site), then press Enter or click to run.
+**Windows** — download `shape_sorting-terminal-windows.zip` from the [latest release](https://github.com/ronilan/shape_sorting/releases), create a dedicated folder (e.g. `C:\Program Files\shape_sorting\`), place `shape_sorting.exe` inside it, then search Windows for "Environment Variables", edit the system variables, and append that folder to the system PATH.
 
-For headless usage (no UI):
+Verify it works by opening a new terminal anywhere and typing `shape_sorting`. If the program responds, it is correctly placed.
+
+### Uninstall
+
+One-liners, mirroring the quick install. The scripts remove the installed binary; the Windows script also removes the (now-empty) install folder and its PATH entry.
+
+**macOS / Linux:**
 
 ```bash
-./package --all            # Packages all targets
-./package --terminal       # Packages terminal CLI target
-./package --wasm           # Builds WASM + site (production)
-./package --macos          # Packages macOS native binary
-./package --windows        # Packages Windows native binary
-./package --clean --all    # Cleans build output then packages all
-./package --publish        # Packages and publishes to GitHub release
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ronilan/shape_sorting/main/uninstall.sh | bash
 ```
 
-For full documentation of the package tool, see [`tools/package/README.md`](tools/package/README.md).
+**Windows:**
 
-## GitHub Actions
-
-This template ships with two preconfigured workflows (in `.github/workflows/`) that automate building and distributing your app on GitHub's servers. They overlap with what the **Package tool** does locally, but add cross-platform parallel builds and event-driven automation. See [Doing the same thing (mostly) with the package tool](#doing-the-same-thing-mostly-with-the-package-tool) below.
-
-*   **Create Downloadable Binaries** (`downloadable_binaries.yml`) — builds and publishes downloadable binaries:
-    *   The Terminal binary across four platforms: macOS (Apple Silicon), macOS (Intel), Windows, and Linux.
-    *   The macOS native and Windows native GUI applications.
-    *   The resulting `.zip` artifacts are attached to a GitHub Release when you publish one, or uploaded to a rolling `latest` build tag when run manually.
-
-*   **Deploy to GitHub Pages** (`github_pages.yml`) — builds the WASM/web version and deploys it as a static site to GitHub Pages. It runs automatically on every push to `main` and can also be triggered manually.
-
-> Note: this repo depends on the private **incredible-alpha** crate, so the workflows require a `INCREDIBLE_ALPHA` secret (a GitHub token with read access to that repo) configured under Settings > Secrets and variables > Actions.
-
-### Workflows vs. package tool
-
-Some, but not all, of what the **Create Downloadable Binaries** workflow does can also be done locally with the **Package tool**. `./package` builds and bundles the same targets for the platform you are running on, and `./package --publish` attaches the release assets to a GitHub Release. Note that the package tool builds only the platform it runs on, whereas GitHub Actions build the binaries for all platforms on separate runners in parallel.
-
-## Download & Run with Docker
-
-Build the Docker image:
-
-```bash
-docker build -t incredible_app_template .
+```powershell
+irm https://raw.githubusercontent.com/ronilan/shape_sorting/main/uninstall.ps1 | iex
 ```
 
-Run the container:
+Both scripts resolve the binary name from the latest release. If that lookup fails (e.g. the release is gone), pass the name explicitly: `bash uninstall.sh <binary-name>` / `uninstall.ps1 -BinName <name>`.
 
-```bash
-docker run -it incredible_app_template
-```
+## Your stats
 
-This downloads the latest release binary from GitHub and runs it inside the container.
+Your fastest game and total time wasted are saved between runs in a per-user file:
+
+- **macOS:** `~/Library/Application Support/shape_sorting/.shape_sorting`
+- **Linux:** `~/.local/share/shape_sorting/.shape_sorting`
+- **Windows:** `%APPDATA%\shape_sorting\.shape_sorting`
+
+The web version stores your stats in the browser's local storage. If the file can't be written (or the browser blocks storage), the game simply runs without saving — nothing crashes.
+
+## Development
+
+See [Development](./markdowns/DEVELOPMENT.md) and [Development Environment Prerequisites](./markdowns/DEVELOPMENT_PREREQUISITES.md)
 
 ---
 

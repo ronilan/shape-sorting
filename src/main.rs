@@ -1,44 +1,21 @@
-#[cfg(not(any(
-    target_arch = "wasm32",
-    all(target_os = "macos", feature = "macos-native"),
-    all(target_os = "windows", feature = "windows-native"),
-)))]
-mod ui;
-
-#[cfg(not(any(
-    target_arch = "wasm32",
-    all(target_os = "macos", feature = "macos-native"),
-    all(target_os = "windows", feature = "windows-native"),
-)))]
+mod app;
+mod core;
+mod data;
+mod elements;
+mod game;
 mod platform;
-
-#[cfg(not(any(
-    target_arch = "wasm32",
-    all(target_os = "macos", feature = "macos-native"),
-    all(target_os = "windows", feature = "windows-native"),
-)))]
 mod runtime;
+mod screens;
 
-#[cfg(not(any(
-    target_arch = "wasm32",
-    all(target_os = "macos", feature = "macos-native"),
-    all(target_os = "windows", feature = "windows-native"),
-)))]
+#[cfg(all(not(target_arch = "wasm32"), not(feature = "macos-native")))]
 fn main() {
     runtime::run();
 }
 
-#[cfg(all(target_os = "macos", feature = "macos-native"))]
+#[cfg(all(not(target_arch = "wasm32"), feature = "macos-native"))]
 fn main() {
     eprintln!(
-        "This binary is for Terminal. Use the macOS-native binary for the macOS version, or build without the 'macos-native' feature."
-    );
-}
-
-#[cfg(all(target_os = "windows", feature = "windows-native"))]
-fn main() {
-    eprintln!(
-        "This binary is for Terminal. Use the Windows-native binary for the Windows version, or build without the 'windows-native' feature."
+        "The 'shape_sorting' binary is for Terminal. Use 'shape_sorting_macos' for the macOS version, or build without the 'macos-native' feature."
     );
 }
 
