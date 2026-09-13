@@ -1,41 +1,71 @@
 # Shape Sorting
 
-A shape sorting game built on the [Incredible](https://www.incredible.rs) framework.
+A game about sorting shapes by color or shape, played with the keyboard, the mouse, or both (that also works on the web: [Try it out!](https://ronilan.github.io/shape_sorting/)).
 
-Move shapes from the shape box into the drop boxes and sort them by **shape** or **color**. Play with the keyboard (🔑), the mouse (🐭), or both (🔑 & 🐭) — and find out which is faster!
+Warning: this activity is an utter total waste of time that is not even remotely enjoyable. Like, seriously.
 
-## Overview
+It's written in [Rust](https://www.rust-lang.org/) using the [Incredible](https://www.incredible.rs/) TUI framework.
 
-The game opens on a splash screen where you pick an input mode, runs on the board while you sort, and shows your time when the shape box is emptied. Your fastest game and total time wasted are saved between runs.
+# Play
 
-## Features
+## Web
 
-- **Keyboard, Mouse, or Both** — pick your input mode on the splash screen
-- **Sort by shape or by color** — two ways to empty the box
-- **Stats between runs** — fastest game and total time wasted are persisted
-- **Cross-platform** — a terminal app, a native GUI app on macOS and Windows, and a browser version (WASM)
+Play right in your browser — no install needed: https://ronilan.github.io/shape_sorting/
 
-## Installation
+## Native binaries
 
-Pre-built binaries are provided for each [release](https://github.com/ronilan/shape_sorting/releases).
+Pre built binaries are provided for each [release](https://github.com/ronilan/shape_sorting/releases). Download the one for your platform (`shape_sorting-terminal-<platform>.zip`), unzip, and run it.
 
-### Quick install (script)
+## TUI Install
 
-One-liners, in the style of rustup's installer. The scripts fetch the right binary for your platform from the latest release and place it on the PATH automatically. No clone or build required.
-
-**macOS / Linux** — installs into `/usr/local/bin` (asks for your password for `sudo`):
+ The scripts fetch the right binary for your platform from the latest release and install it into `/usr/local/bin` (macOS/Linux) or `C:\Program Files\shape_sorting` (Windows). No clone or build required.
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ronilan/shape_sorting/main/install.sh | bash
 ```
 
-**Windows** — installs into `C:\Program Files\shape_sorting` and adds that folder to the system PATH (the script self-elevates with a UAC prompt):
-
 ```powershell
 irm https://raw.githubusercontent.com/ronilan/shape_sorting/main/install.ps1 | iex
 ```
 
-If you prefer to look before you run, download first, inspect, then execute:
+# Use
+
+## Playing
+
+- Splash screen: pick your input mode — keyboard (🔑), mouse (🐭), or both (🔑 & 🐭). Press **Enter** (or click) to start.
+- Sort shapes from the shape box into the drop boxes, by **shape** or by **color**.
+- When the shape box is emptied, your time is shown.
+
+### Keyboard controls (🔑)
+
+- **Arrow keys** — select
+- **Ctrl+X** — pick up a shape
+- **Ctrl+V** — place the carried shape
+- **Esc** — cancel the carried shape / reset
+- **Space** — switch
+- **Enter** — go inside
+
+### Mouse controls (🐭)
+
+- **Drag & drop** — carry shapes from the shape box into the drop boxes
+
+In the mixed mode (🔑 & 🐭) either set of controls works.
+
+## Files
+
+Your fastest game and total time wasted are saved between runs in a per-user file:
+
+- **macOS:** `~/Library/Application Support/shape_sorting/.shape_sorting`
+- **Linux:** `~/.local/share/shape_sorting/.shape_sorting`
+- **Windows:** `%APPDATA%\shape_sorting\.shape_sorting`
+
+The web version stores your stats in the browser's local storage. If the file can't be written (or the browser blocks storage), the game simply runs without saving — nothing crashes.
+
+# Other ways to install
+
+## Look before you run
+
+If you prefer to inspect the installer scripts before running them, download first, then execute:
 
 **macOS / Linux:**
 
@@ -51,7 +81,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ronilan/shape_sorting/
 powershell -ExecutionPolicy Bypass -File install.ps1
 ```
 
-### Manual install
+## Manual install
 
 **macOS / Linux** — download the binary for your platform from the [latest release](https://github.com/ronilan/shape_sorting/releases), then move it to `/usr/local/bin` (a centralized folder on the default PATH) and give it execution permissions:
 
@@ -64,9 +94,20 @@ sudo chmod +x /usr/local/bin/shape_sorting
 
 Verify it works by opening a new terminal anywhere and typing `shape_sorting`. If the program responds, it is correctly placed.
 
-### Uninstall
+## Linux via Docker
 
-One-liners, mirroring the quick install. The scripts remove the installed binary; the Windows script also removes the (now-empty) install folder and its PATH entry.
+To try the Linux terminal version, build and run:
+
+```
+docker build -t shape_sorting .
+docker run --rm -it shape_sorting
+```
+
+Type `shape_sorting` in the container shell to launch.
+
+## TUI Uninstall
+
+The scripts remove the installed binary; the Windows script also removes the (now-empty) install folder and its PATH entry.
 
 **macOS / Linux:**
 
@@ -81,16 +122,6 @@ irm https://raw.githubusercontent.com/ronilan/shape_sorting/main/uninstall.ps1 |
 ```
 
 Both scripts resolve the binary name from the latest release. If that lookup fails (e.g. the release is gone), pass the name explicitly: `bash uninstall.sh <binary-name>` / `uninstall.ps1 -BinName <name>`.
-
-## Your stats
-
-Your fastest game and total time wasted are saved between runs in a per-user file:
-
-- **macOS:** `~/Library/Application Support/shape_sorting/.shape_sorting`
-- **Linux:** `~/.local/share/shape_sorting/.shape_sorting`
-- **Windows:** `%APPDATA%\shape_sorting\.shape_sorting`
-
-The web version stores your stats in the browser's local storage. If the file can't be written (or the browser blocks storage), the game simply runs without saving — nothing crashes.
 
 ## Development
 
