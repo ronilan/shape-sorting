@@ -1,6 +1,4 @@
 #[cfg(feature = "macos-native")]
-mod app;
-#[cfg(feature = "macos-native")]
 mod core;
 #[cfg(feature = "macos-native")]
 mod data;
@@ -14,6 +12,8 @@ mod platform;
 mod runtime;
 #[cfg(feature = "macos-native")]
 mod screens;
+#[cfg(feature = "macos-native")]
+mod ui;
 
 #[cfg(feature = "macos-native")]
 fn main() {

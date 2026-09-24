@@ -30,6 +30,7 @@ impl Splash {
         let fastest_game_text = ui::fastest_game::build();
         let desc = ui::desc::build();
         let total_time_wasted_text = ui::total_time_wasted::build();
+        let tab_focus = ui::tab_focus::build();
 
         // Elements are auto positioned according to order
         frame.add(name);
@@ -44,9 +45,10 @@ impl Splash {
             .elements_snap_center_x() // Equivalent to setting Align Center
             .elements_to_center_y(); // All to center
 
-        // Element is fixed positioned.
+        // Elements are fixed positioned.
         let exit_button = ui::exit_button::build();
         frame.add(exit_button);
+        frame.add(tab_focus);
 
         el.add(frame);
 

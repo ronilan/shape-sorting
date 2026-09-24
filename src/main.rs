@@ -1,4 +1,3 @@
-mod app;
 mod core;
 mod data;
 mod elements;
@@ -6,6 +5,7 @@ mod game;
 mod platform;
 mod runtime;
 mod screens;
+mod ui;
 
 #[cfg(all(not(target_arch = "wasm32"), not(feature = "macos-native")))]
 fn main() {

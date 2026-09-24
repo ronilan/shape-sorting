@@ -4,5 +4,6 @@ pub(crate) mod fastest_game;
 pub(crate) mod frame;
 pub(crate) mod selector;
 pub(crate) mod sub_title;
+pub(crate) mod tab_focus;
 pub(crate) mod title;
 pub(crate) mod total_time_wasted;

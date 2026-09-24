@@ -12,7 +12,8 @@ pub(crate) fn build() -> App<State> {
     app.auto_surface(false);
 
     // Disabling keyboard exit
-    app.exit_combination(Some(KeyCombination::new(Key::Unknown, &[KeyMod::Ctrl])));
+    app.pre_exit_combination(Some(KeyCombination::new(Key::Char('d'), &[KeyMod::Ctrl])))
+        .exit_combination(Some(KeyCombination::new(Key::Escape, &[])));
 
     app.title("Incredible Shape Sorting");
 

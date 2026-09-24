@@ -1,20 +1,26 @@
 # Shape Sorting
 
-A game about sorting shapes by color or shape, played with the keyboard, the mouse, or both (that also works on the web: [Try it out!](https://ronilan.github.io/shape_sorting/)).
+So, which input device offers better productivit, the keyboard or the mouse?
+
+Let's find out.
+
+Shape Sorting is a game, or, ok maybe better, an activity, about sorting shapes by color or shape, played with the keyboard, the mouse, or both.
 
 Warning: this activity is an utter total waste of time that is not even remotely enjoyable. Like, seriously.
 
 It's written in [Rust](https://www.rust-lang.org/) using the [Incredible](https://www.incredible.rs/) TUI framework.
 
+It can be be played, or, ok maybe better, it can be experianced, in the terminal, using native macOS and Windows app or [right here in the browser](https://ronilan.github.io/shape_sorting/).
+
 # Play
 
 ## Web
 
-Play right in your browser — no install needed: https://ronilan.github.io/shape_sorting/
+No install needed: https://ronilan.github.io/shape_sorting/
 
 ## Native binaries
 
-Pre built binaries are provided for each [release](https://github.com/ronilan/shape_sorting/releases). Download the one for your platform (`shape_sorting-terminal-<platform>.zip`), unzip, and run it.
+Pre built binaries are provided for each [release](https://github.com/ronilan/shape-sorting/releases). Download the one for your platform (`shape_sorting-terminal-<platform>.zip`), unzip, and run it.
 
 ## TUI Install
 
@@ -83,14 +89,14 @@ powershell -ExecutionPolicy Bypass -File install.ps1
 
 ## Manual install
 
-**macOS / Linux** — download the binary for your platform from the [latest release](https://github.com/ronilan/shape_sorting/releases), then move it to `/usr/local/bin` (a centralized folder on the default PATH) and give it execution permissions:
+**macOS / Linux** — download the binary for your platform from the [latest release](https://github.com/ronilan/shape-sorting/releases), then move it to `/usr/local/bin` (a centralized folder on the default PATH) and give it execution permissions:
 
 ```bash
 sudo mv shape_sorting /usr/local/bin/
 sudo chmod +x /usr/local/bin/shape_sorting
 ```
 
-**Windows** — download `shape_sorting-terminal-windows.zip` from the [latest release](https://github.com/ronilan/shape_sorting/releases), create a dedicated folder (e.g. `C:\Program Files\shape_sorting\`), place `shape_sorting.exe` inside it, then search Windows for "Environment Variables", edit the system variables, and append that folder to the system PATH.
+**Windows** — download `shape_sorting-terminal-windows.zip` from the [latest release](https://github.com/ronilan/shape-sorting/releases), create a dedicated folder (e.g. `C:\Program Files\shape_sorting\`), place `shape_sorting.exe` inside it, then search Windows for "Environment Variables", edit the system variables, and append that folder to the system PATH.
 
 Verify it works by opening a new terminal anywhere and typing `shape_sorting`. If the program responds, it is correctly placed.
 

@@ -1,8 +1,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 #[cfg(all(target_os = "windows", feature = "windows-native"))]
-mod app;
-#[cfg(all(target_os = "windows", feature = "windows-native"))]
 mod core;
 #[cfg(all(target_os = "windows", feature = "windows-native"))]
 mod data;
@@ -16,6 +14,8 @@ mod platform;
 mod runtime;
 #[cfg(all(target_os = "windows", feature = "windows-native"))]
 mod screens;
+#[cfg(all(target_os = "windows", feature = "windows-native"))]
+mod ui;
 
 #[cfg(all(target_os = "windows", feature = "windows-native"))]
 fn main() {

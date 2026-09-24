@@ -8,7 +8,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fL \
-    https://github.com/ronilan/shape_sorting/releases/latest/download/shape_sorting-terminal-linux.zip
+    https://github.com/ronilan/shape-sorting/releases/latest/download/shape_sorting-terminal-linux.zip
     -o /tmp/shape_sorting.zip
     && unzip -o /tmp/shape_sorting.zip -d /usr/local/bin
     && rm /tmp/shape_sorting.zip

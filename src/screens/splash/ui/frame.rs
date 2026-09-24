@@ -11,7 +11,8 @@ pub(crate) fn build() -> Frame<State> {
         .width(80)
         .height(24)
         .faint(Some(true))
-        .kind(Some(FrameKind::Dotted));
+        .kind(Some(FrameKind::Dotted))
+        .focused_kind(Some(FrameKind::Dotted));
 
     frame
 }
