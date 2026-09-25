@@ -10,21 +10,21 @@ Warning: this activity is an utter total waste of time that is not even remotely
 
 It's written in [Rust](https://www.rust-lang.org/) using the [Incredible](https://www.incredible.rs/) TUI framework.
 
-It can be be played, or, ok maybe better, it can be experianced, in the terminal, using native macOS and Windows app or [right here in the browser](https://ronilan.github.io/shape_sorting/).
+It can be be played, or, ok maybe better, it can be experianced, in the terminal, using native macOS and Windows app or [right here in the browser](https://ronilan.github.io/shape-sorting/).
 
 # Play
 
 ## Web
 
-No install needed: https://ronilan.github.io/shape_sorting/
+No install needed: https://ronilan.github.io/shape-sorting/
 
 ## Native binaries
 
 Pre built binaries are provided for each [release](https://github.com/ronilan/shape-sorting/releases). Download the one for your platform (`shape_sorting-terminal-<platform>.zip`), unzip, and run it.
 
-## TUI Install
+## TUI Install / Uninstall
 
- The scripts fetch the right binary for your platform from the latest release and install it into `/usr/local/bin` (macOS/Linux) or `C:\Program Files\shape_sorting` (Windows). No clone or build required.
+Installs the latest release binary — `/usr/local/bin` (macOS/Linux) or `C:\Program Files\shape_sorting` (Windows). No clone or build required:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ronilan/shape_sorting/main/install.sh | bash
@@ -33,6 +33,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ronilan/s
 ```powershell
 irm https://raw.githubusercontent.com/ronilan/shape_sorting/main/install.ps1 | iex
 ```
+
+Uninstall the same way with `uninstall.sh` / `uninstall.ps1`. If the release lookup fails, pass the binary name explicitly: `bash uninstall.sh <binary-name>` / `uninstall.ps1 -BinName <name>`.
 
 # Use
 
@@ -110,24 +112,6 @@ docker run --rm -it shape_sorting
 ```
 
 Type `shape_sorting` in the container shell to launch.
-
-## TUI Uninstall
-
-The scripts remove the installed binary; the Windows script also removes the (now-empty) install folder and its PATH entry.
-
-**macOS / Linux:**
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ronilan/shape_sorting/main/uninstall.sh | bash
-```
-
-**Windows:**
-
-```powershell
-irm https://raw.githubusercontent.com/ronilan/shape_sorting/main/uninstall.ps1 | iex
-```
-
-Both scripts resolve the binary name from the latest release. If that lookup fails (e.g. the release is gone), pass the name explicitly: `bash uninstall.sh <binary-name>` / `uninstall.ps1 -BinName <name>`.
 
 ## Development
 

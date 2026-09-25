@@ -10,7 +10,6 @@ use crate::{
 
 pub fn build_app() -> App<State> {
     // UI mode: calculate heights dynamically based on item count
-    // TODO: get this out of app
     let mut item_count = 2usize;
     if is_macos() || is_windows() {
         item_count += 1;
