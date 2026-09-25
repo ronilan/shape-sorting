@@ -21,6 +21,7 @@ impl Board {
         let el = Self::blank();
 
         el.look(Look::from((80, 24, ' ')));
+        el.draw_override(Some(DrawOverride::auto_render()));
 
         let frame: Frame<State> = ui::frame::build();
 
@@ -78,8 +79,6 @@ impl Board {
                     state.game_state != GameState::Splash
                         && state.game_state != GameState::Completed,
                 );
-                // TODO - because the timer updates on loop - the board does not need draw override.
-                el.draw();
             });
 
         el

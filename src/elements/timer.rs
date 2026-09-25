@@ -49,8 +49,8 @@ impl<S: Clone + PartialEq> Timer<S> {
 
         el.look(Look::from((display.get_width(), display.get_height())));
 
-        // Refresh the on-screen timer every loop tick.
-        // TODO - this triggers collection across the board
+        // Refresh elapsed time every loop, while the display is only rebuilt
+        // when its configured precision changes.
         el.internal_on_loop(|el, _, _| {
             el.update_display();
         });
@@ -70,14 +70,20 @@ impl<S: Clone + PartialEq> Timer<S> {
             self.accumulated_ms.get()
         };
 
-        // Update state
+        // Update state every loop so stats stay accurate, but only rebuild and
+        // redraw the display when its configured precision changes.
+        let previous_elapsed = self.internal_state.elapsed_ms.get();
+        let display_precision_ms = if self.options.show_ms { 10 } else { 1_000 };
+        let display_changed =
+            previous_elapsed / display_precision_ms != elapsed / display_precision_ms;
         self.internal_state.elapsed_ms.set(elapsed);
 
-        if let Some(display) = self.elements.cot::<FancyStr<S>>().first() {
-            display.text(Self::format_time(elapsed, self.options.show_ms).as_str());
+        if display_changed {
+            if let Some(display) = self.elements.cot::<FancyStr<S>>().first() {
+                display.text(Self::format_time(elapsed, self.options.show_ms).as_str());
+            }
+            self.draw();
         }
-        // TODO - don't really need to draw if not showing ms
-        self.draw();
     }
 
     /// Sets the display color for the timer text.

@@ -288,11 +288,7 @@ impl ShapeSorting {
                     }
 
                     if let Some(dragged) = dragged_opt {
-                        if let Some(shape_box) = frames.last() {
-                            dragged
-                                .x(shape_box.get_x() + shape_box.get_width() as isize + 2)
-                                .focused(false);
-                        }
+                        dragged.focused(false);
                         el.elements.inner.borrow_mut().push(dragged);
                     }
 

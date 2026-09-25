@@ -12,12 +12,12 @@ pub(crate) fn build() -> Timer<State> {
     let timer: Timer<State> = Timer::default();
     timer.x(X).y(Y).color(Some(Color::Ansi(5)));
 
-    // Mirror timer's elapsed milliseconds into app state for stats.
-    timer.on_loop(|el, state, event| {
-        // TODO - don't really need "sub second stats"
-        // currently it drives board over rendering
-        if event.loop_count % 2 == 0 {
-            state.stats.last_game_time = el.get_elapsed_ms();
+    // Stats only need whole-second precision. Mirror the timer into app state
+    // only when that value changes to avoid a board redraw every other loop.
+    timer.on_loop(|el, state, _event| {
+        let elapsed_time_ms = el.get_elapsed_ms() / 1_000 * 1_000;
+        if elapsed_time_ms != state.stats.last_game_time {
+            state.stats.last_game_time = elapsed_time_ms;
         }
     });
 
