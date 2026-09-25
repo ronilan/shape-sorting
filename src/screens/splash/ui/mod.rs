@@ -1,0 +1,9 @@
+pub(crate) mod desc;
+pub(crate) mod exit_button;
+pub(crate) mod fastest_game;
+pub(crate) mod frame;
+pub(crate) mod selector;
+pub(crate) mod sub_title;
+pub(crate) mod controls;
+pub(crate) mod title;
+pub(crate) mod total_time_wasted;
