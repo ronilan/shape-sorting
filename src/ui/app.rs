@@ -12,7 +12,6 @@ pub(crate) fn build() -> App<State> {
     // Disabling keyboard exit
     app.pre_exit_combination(Some(KeyCombination::new(Key::Char('d'), &[KeyMod::Ctrl])))
         .exit_combination(Some(KeyCombination::new(Key::Escape, &[])))
-        .title("Incredible Shape Sorting")
         .auto_surface(false);
 
     // Window events: keep layout centered on resize and pause/resume on focus changes.
