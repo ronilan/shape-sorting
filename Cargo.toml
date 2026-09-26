@@ -5,8 +5,8 @@ edition = "2024"
 default-run= "shape_sorting"
 
 [package.metadata.html]
-title= "Shape Sorting :: Which is faster: keyboard or mouse?"
-description= "A game about sorting shapes by color or shape, played with the keyboard, the mouse, or both. Warning: this activity is an utter total waste of time that is not even remotely enjoyable. Like, seriously."
+title= "Shape Sorting :: Which is faster: the keyboard or mouse?"
+description= "A game about sorting shapes by color or shape, played with the keyboard, the mouse, or both."
 keywords= "tui, rust, wasm, game, shapes"
 mobile-min-width = 80
 mobile-min-height = 24
