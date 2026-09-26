@@ -58,8 +58,8 @@ Uninstall the same way with `uninstall.sh` / `uninstall.ps1`.
 ## Keyboard controls (🔑)
 
 - **Arrow keys** — select
-- **Ctrl+X** — pick up a shape
-- **Ctrl+V** — place the carried shape
+- **X** — pick up a shape
+- **V** — place the carried shape
 - **Esc** — cancel the carried shape / reset
 - **Space** — switch
 - **Enter** — go inside

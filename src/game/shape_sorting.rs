@@ -108,8 +108,10 @@ impl ShapeSorting {
                     Key::Right => el.shift_focus(1),
                     Key::Up => el.shift_focus_vertical(-1),
                     Key::Down => el.shift_focus_vertical(1),
-                    // Ctrl+x: pick up the focused shape (like mouse drag)
-                    Key::Char('x') if event.modifiers.contains(&KeyMod::Ctrl) => {
+                    // x: pick up the focused shape (like mouse drag).
+                    // Bare or Ctrl+ runs everywhere: terminals claim Ctrl+V/Ctrl+C
+                    // for paste/copy, so bare keys are the reliable path.
+                    Key::Char('x') | Key::Char('X') => {
                         if el.elements.cot::<ColoredShape<State>>().first().is_none() {
                             let frames = el.elements.cot::<Frame<State>>();
 
@@ -196,8 +198,9 @@ impl ShapeSorting {
                         }
                     }
 
-                    // Ctrl+v: drop the floating shape (like mouse up)
-                    Key::Char('v') if event.modifiers.contains(&KeyMod::Ctrl) => {
+                    // v: drop the floating shape (like mouse up).
+                    // Bare or Ctrl+ runs everywhere: see pick above.
+                    Key::Char('v') | Key::Char('V') => {
                         if let Some((_, shape)) = el.elements.sot::<ColoredShape<State>>() {
                             let frames = el.elements.cot::<Frame<State>>();
                             let mut placed = false;

@@ -24,10 +24,10 @@ pub(crate) fn build() -> Label<State> {
             GameType::Mouse => "
 🐭 Mode: Drag & Drop shapes to box",
             GameType::Key => {
-                "🔑 Mode: Arrows select, ctrl+x pick, ctrl+v place, esc to reset, space to switch, enter go inside."
+                "🔑 Mode: Arrows select, x pick, v place, esc to reset, space to switch, enter go inside."
             }
             GameType::Mix => {
-                "🔑 & 🐭  Mode: Drag & Drop -or- Arrows select, ctrl+x & ctrl+v, esc to reset, space to switch, enter go inside."
+                "🔑 & 🐭  Mode: Drag & Drop -or- Arrows select, x & v, esc to reset, space to switch, enter go inside."
             }
         };
         el.text(text);
