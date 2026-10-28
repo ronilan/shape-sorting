@@ -20,7 +20,7 @@ pub(crate) fn build() -> Vec<Frame<State>> {
                 .y(Y)
                 .width(4)
                 .height(4)
-                .fill(Some('.'))
+                .fill(Some(incredible_elements::FillKind::Custom('.')))
                 .color(Some(Color::Ansi(color)))
                 .focused(false);
             f
@@ -31,7 +31,7 @@ pub(crate) fn build() -> Vec<Frame<State>> {
                 .y(Y + 18)
                 .width(4)
                 .height(4)
-                .fill(Some(symbol))
+                .fill(Some(incredible_elements::FillKind::Custom(symbol)))
                 .color(None)
                 .focused(false);
             f

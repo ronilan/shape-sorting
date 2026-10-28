@@ -16,7 +16,7 @@ pub(crate) fn build() -> Frame<State> {
         .y(Y)
         .width(18)
         .height(6)
-        .fill(Some('.'))
+        .fill(Some(incredible_elements::FillKind::Custom('.')))
         .color(None)
         .focused(false);
 

@@ -1,7 +1,7 @@
 use std::cell::Cell;
 
 use incredible::*;
-use incredible_elements::{Frame, FrameKind};
+use incredible_elements::{FillKind, Frame, FrameKind};
 use incredible_helpers_layout::*;
 use incredible_helpers_styling::*;
 use incredible_macros_decl::element_for;
@@ -409,7 +409,9 @@ impl ShapeSorting {
             .iter()
             .position(|&c| c == shape.options.shape)
             .and_then(|idx| EMPTY_SYMBOLS.get(idx))
-            == Some(&frame.get_fill().unwrap_or_default());
+            .is_some_and(|symbol| {
+                matches!(frame.get_fill(), Some(FillKind::Custom(c)) if c == *symbol)
+            });
 
         let matches_color = frame.get_color() == Some(shape.options.color.into());
 
