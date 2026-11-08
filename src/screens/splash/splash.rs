@@ -1,7 +1,7 @@
 use std::cell::Cell;
 
 use incredible::*;
-use incredible_elements::{Button, Frame, TextButton};
+use incredible_elements::{Button, Frame};
 use incredible_helpers_layout::*;
 use incredible_macros_decl::element_for;
 
@@ -59,31 +59,21 @@ impl Splash {
                     // get selector (Rectangle)
 
                     let btns = el.elements.dcot::<Button<State>>();
-                    let text_btns = el.elements.dcot::<TextButton<State>>();
 
-                    let total = btns.len() + text_btns.len();
-                    if total == 0 {
+                    if btns.is_empty() {
                         return;
                     }
 
                     let next = match el.selected_index.get() {
-                        Some(idx) => (idx + 1) % total,
+                        Some(idx) => (idx + 1) % btns.len(),
                         None => 0,
                     };
 
                     el.selected_index.set(Some(next));
 
                     let selected = el.selected_index.get();
-                    let mut i = 0;
-
-                    for btn in btns {
+                    for (i, btn) in btns.into_iter().enumerate() {
                         btn.focused(Some(i) == selected);
-                        i += 1;
-                    }
-
-                    for btn in text_btns {
-                        btn.focused(Some(i) == selected);
-                        i += 1;
                     }
                 }
 

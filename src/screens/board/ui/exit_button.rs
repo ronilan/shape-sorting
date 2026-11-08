@@ -1,5 +1,5 @@
 use incredible::*;
-use incredible_elements::TextButton;
+use incredible_elements::Button;
 use incredible_helpers_styling::*;
 
 use crate::core::State;
@@ -9,10 +9,15 @@ const X: isize = 74;
 const Y: isize = 1;
 
 /// Builds the Back button (returns to Splash and records time).
-pub(crate) fn build() -> TextButton<State> {
-    let exit_button: TextButton<State> = TextButton::default();
-    exit_button.text("Back").color(Some(Color::Ansi(6)));
-    exit_button.x(X).y(Y).focused(false);
+pub(crate) fn build() -> Button<State> {
+    let exit_button: Button<State> = Button::default();
+    exit_button.conf_text();
+    exit_button
+        .x(X)
+        .y(Y)
+        .text("Back")
+        .color(Some(Color::Ansi(6)))
+        .focused(false);
 
     // Back button: return to Splash and record time.
     exit_button

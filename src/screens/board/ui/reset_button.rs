@@ -1,5 +1,5 @@
 use incredible::*;
-use incredible_elements::TextButton;
+use incredible_elements::Button;
 use incredible_helpers_styling::*;
 
 use crate::core::State;
@@ -9,14 +9,20 @@ const X: isize = 73;
 const Y: isize = 22;
 
 /// Builds the Reset button (restarts the current game).
-pub(crate) fn build() -> TextButton<State> {
-    let reset_button: TextButton<State> = TextButton::default();
-    reset_button.text("Reset").color(Some(Color::Ansi(6)));
-    reset_button.x(X).y(Y).showed(false).focused(false);
+pub(crate) fn build() -> Button<State> {
+    let reset_button: Button<State> = Button::default();
+    reset_button.conf_text();
+    reset_button
+        .x(X)
+        .y(Y)
+        .text("Reset")
+        .color(Some(Color::Ansi(6)))
+        .showed(false)
+        .focused(false);
 
     // Reset button: restart the game without leaving the board.
     // TODO: the action of both key and mouse is identical - set the same to ready however
-    // containing element also has on_key that sets game to running.
+    // containing element also has on_key that sets game to running thus key reset is not working.
     reset_button
         .on_key(|_el, state, event| {
             if event.key == Key::Enter {

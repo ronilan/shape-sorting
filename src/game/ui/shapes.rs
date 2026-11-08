@@ -35,8 +35,7 @@ pub(crate) fn build() -> Vec<ColoredShape<State>> {
     combos.shuffle(&mut rng);
 
     let mut shapes = Vec::new();
-    for idx in 0..SHAPE_COUNT {
-        let (color, symbol) = combos[idx];
+    for &(color, symbol) in combos.iter().take(SHAPE_COUNT) {
 
         let shape = ColoredShape::new(ColoredShapeOptions {
             color,

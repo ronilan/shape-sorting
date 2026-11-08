@@ -1,7 +1,7 @@
 use std::cell::Cell;
 
 use incredible::*;
-use incredible_elements::{Frame, TextButton};
+use incredible_elements::{Button, Frame};
 use incredible_macros_decl::element_for;
 
 use crate::core::State;
@@ -29,8 +29,8 @@ impl Board {
 
         let timer = ui::timer::build();
         let controls_text = ui::controls::build();
-        let exit_button: TextButton<State> = ui::exit_button::build();
-        let reset_button: TextButton<State> = ui::reset_button::build();
+        let exit_button: Button<State> = ui::exit_button::build();
+        let reset_button: Button<State> = ui::reset_button::build();
 
         // Element are fixed positioned.
         frame.add(shape_sorting);
@@ -49,7 +49,7 @@ impl Board {
             // Tab cycles focus between board-level buttons (Back/Reset).
             .internal_on_key(|el, _state, event| {
                 if event.key == Key::Tab {
-                    let text_btns = el.elements.dcot::<TextButton<State>>();
+                    let text_btns = el.elements.dcot::<Button<State>>();
 
                     let total = text_btns.len();
                     if total == 0 {
@@ -64,11 +64,8 @@ impl Board {
                     el.selected_index.set(Some(next));
 
                     let selected = el.selected_index.get();
-                    let mut i = 0;
-
-                    for btn in text_btns {
+                    for (i, btn) in text_btns.into_iter().enumerate() {
                         btn.focused(Some(i) == selected);
-                        i += 1;
                     }
                 }
 

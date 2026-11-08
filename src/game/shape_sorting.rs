@@ -112,7 +112,7 @@ impl ShapeSorting {
                     // Bare or Ctrl+ runs everywhere: terminals claim Ctrl+V/Ctrl+C
                     // for paste/copy, so bare keys are the reliable path.
                     Key::Char('x') | Key::Char('X') => {
-                        if el.elements.cot::<ColoredShape<State>>().first().is_none() {
+                        if el.elements.cot::<ColoredShape<State>>().is_empty() {
                             let frames = el.elements.cot::<Frame<State>>();
 
                             let mut picked_shape = None;
@@ -409,9 +409,9 @@ impl ShapeSorting {
             .iter()
             .position(|&c| c == shape.options.shape)
             .and_then(|idx| EMPTY_SYMBOLS.get(idx))
-            .is_some_and(|symbol| {
-                matches!(frame.get_fill(), Some(FillKind::Custom(c)) if c == *symbol)
-            });
+            .is_some_and(
+                |symbol| matches!(frame.get_fill(), Some(FillKind::Custom(c)) if c == *symbol),
+            );
 
         let matches_color = frame.get_color() == Some(shape.options.color.into());
 
@@ -421,7 +421,7 @@ impl ShapeSorting {
     fn update_completion(&self, state: &mut State) {
         let frames = self.elements.cot::<Frame<State>>();
         if let Some(shape_box) = frames.last() {
-            if shape_box.elements.len() == 0 && state.game_state == GameState::Running {
+            if shape_box.elements.is_empty() && state.game_state == GameState::Running {
                 state.game_state = GameState::Completed;
                 if state.stats.last_game_time > 0
                     && (state.stats.fastest_game == 0

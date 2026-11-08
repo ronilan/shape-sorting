@@ -74,7 +74,7 @@ fn register_palettes() {
 }
 
 fn persistence() -> PlatformPersistence {
-    PlatformPersistence::default()
+    PlatformPersistence
 }
 
 pub(crate) fn load_state() -> crate::core::State {

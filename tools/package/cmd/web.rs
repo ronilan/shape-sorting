@@ -106,10 +106,7 @@ pub fn build() -> io::Result<()> {
         .args(["build", "--target", "web", "--release"])
         .status()?;
     if !status.success() {
-        return Err(io::Error::new(
-            io::ErrorKind::Other,
-            "wasm-pack build failed",
-        ));
+        return Err(io::Error::other("wasm-pack build failed"));
     }
 
     if docs_dir().exists() {
@@ -141,10 +138,7 @@ pub fn build() -> io::Result<()> {
     }
 
     let meta = cargo::html_metadata();
-    let index_from = match fs::read_to_string(Path::new("web").join("index.html")) {
-        Ok(s) => s,
-        Err(e) => return Err(e),
-    };
+    let index_from = fs::read_to_string(Path::new("web").join("index.html"))?;
     let injected = inject_html(&index_from, &meta);
     write_file(&docs_dir().join("index.html"), &injected)?;
 
@@ -172,12 +166,10 @@ pub fn serve() -> io::Result<()> {
     }
     let listener = TcpListener::bind("0.0.0.0:4627")?;
     println!("Serving {} at http://localhost:4627", docs_dir().display());
-    for stream in listener.incoming() {
-        if let Ok(stream) = stream {
-            thread::spawn(move || {
-                let _ = handle_stream(stream);
-            });
-        }
+    for stream in listener.incoming().flatten() {
+        thread::spawn(move || {
+            let _ = handle_stream(stream);
+        });
     }
     Ok(())
 }
