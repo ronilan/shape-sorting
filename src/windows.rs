@@ -19,7 +19,6 @@ mod ui;
 
 #[cfg(all(target_os = "windows", feature = "windows-native"))]
 fn main() {
-    incredible_window_windows::set_window_title(option_env!("APP_NAME").unwrap_or("Shape Sorting"));
     platform::init();
     incredible_window_windows::run_app(runtime::run);
 }

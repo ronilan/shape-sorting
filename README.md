@@ -24,17 +24,6 @@ No install needed: https://ronilan.github.io/shape-sorting/
 
 Prebuilt binaries are provided for each [release](https://github.com/ronilan/shape-sorting/releases).
 
-## Linux via Docker
-
-To try the Linux terminal version, build and run:
-
-```
-docker build -t shape_sorting .
-docker run --rm -it shape_sorting
-```
-
-Type `shape_sorting` in the container shell to launch.
-
 ## TUI Install / Uninstall
 
 Installs the latest release binary — `/usr/local/bin` (macOS/Linux) or `C:\Program Files\shape_sorting` (Windows).
@@ -48,6 +37,21 @@ irm https://raw.githubusercontent.com/ronilan/shape-sorting/main/install.ps1 | i
 ```
 
 Uninstall the same way with `uninstall.sh` / `uninstall.ps1`. 
+
+## Linux via Docker
+
+To try the Linux terminal version, fetch the repository's `Dockerfile` and build the image (it downloads the latest Linux release, so no source checkout is needed):
+
+```bash
+mkdir docker-build && cd docker-build
+curl -fsSL https://raw.githubusercontent.com/ronilan/shape-sorting/main/Dockerfile -o Dockerfile
+docker build -t shape_sorting .
+docker run --rm -it shape_sorting
+```
+
+Run the commands in an **empty folder** (not your home directory) so Docker's build context doesn't include large/system folders like `~/.Trash`.
+
+Type `shape_sorting` in the container shell to launch.
 
 # Play
 
