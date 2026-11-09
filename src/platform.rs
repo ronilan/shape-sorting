@@ -74,6 +74,11 @@ fn register_palettes() {
 }
 
 fn persistence() -> PlatformPersistence {
+    // `PlatformPersistence` is a type alias (`FilePersistence` on native,
+    // `LocalStoragePersistence` on wasm). It is *not* a unit struct, so the
+    // bare `PlatformPersistence` form clippy suggests would not compile —
+    // `Default` is the only way to construct a value of either alias.
+    #[allow(clippy::default_constructed_unit_structs)]
     PlatformPersistence::default()
 }
 

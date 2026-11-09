@@ -1,5 +1,5 @@
 use incredible::*;
-use incredible_elements::{Frame, FrameKind};
+use incredible_elements::{FillKind, Frame, FrameKind};
 use incredible_helpers_styling::*;
 
 use crate::core::State;
@@ -16,7 +16,7 @@ pub(crate) fn build() -> Frame<State> {
         .y(Y)
         .width(18)
         .height(6)
-        .fill(Some(incredible_elements::FillKind::Custom('.')))
+        .fill(Some(FillKind::Custom('.')))
         .color(None)
         .focused(false);
 

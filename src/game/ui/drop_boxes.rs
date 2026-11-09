@@ -1,5 +1,5 @@
 use incredible::*;
-use incredible_elements::{Frame, FrameKind};
+use incredible_elements::{FillKind, Frame, FrameKind};
 use incredible_helpers_styling::*;
 
 use crate::core::State;
@@ -20,7 +20,7 @@ pub(crate) fn build() -> Vec<Frame<State>> {
                 .y(Y)
                 .width(4)
                 .height(4)
-                .fill(Some(incredible_elements::FillKind::Custom('.')))
+                .fill(Some(FillKind::Custom('.')))
                 .color(Some(Color::Ansi(color)))
                 .focused(false);
             f
@@ -31,7 +31,7 @@ pub(crate) fn build() -> Vec<Frame<State>> {
                 .y(Y + 18)
                 .width(4)
                 .height(4)
-                .fill(Some(incredible_elements::FillKind::Custom(symbol)))
+                .fill(Some(FillKind::Custom(symbol)))
                 .color(None)
                 .focused(false);
             f
